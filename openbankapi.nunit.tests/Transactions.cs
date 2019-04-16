@@ -35,9 +35,9 @@ namespace openbankapi.nunit.tests
 
         [Test]
         public void Provided_Account_Details_Should_Get_Balance() {
-            var expectedBalance = 1000;
+            int expectedBalance = 1000;
 
-            var actualBalance = txService.GetBalance(account1);
+            int actualBalance = txService.GetBalance(account1);
 
             Assert.AreEqual(expectedBalance, actualBalance);
         }

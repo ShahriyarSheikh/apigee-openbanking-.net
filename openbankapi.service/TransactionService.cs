@@ -103,7 +103,7 @@ namespace openbankapi.service
 
         private void ProcessTransaction(string accountNoTo, string accountNoFrom, int amount, long dateTimeOffset)
         {
-            var transactionDetailsReceiver = new Transaction
+            Transaction transactionDetailsReceiver = new Transaction
             {
                 AccountId = accountNoTo,
                 Amount = new Amount
@@ -138,7 +138,7 @@ namespace openbankapi.service
                 TransactionReference = accountNoFrom,
                 ValueDateTime = 21342142123
             };
-            var transactionDetailsSender = new Transaction
+            Transaction transactionDetailsSender = new Transaction
             {
                 AccountId = accountNoFrom,
                 Amount = new Amount
@@ -179,7 +179,7 @@ namespace openbankapi.service
 
         public void GenerateAmountFromTestFaucet(string accountNo) {
             EnsureAccount(accountNo);
-                var transactionDetails = new Transaction
+            Transaction transactionDetails = new Transaction
                 {
                     AccountId = accountNo,
                     Amount = new Amount
