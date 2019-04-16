@@ -1,26 +1,24 @@
-﻿using openbankapi.service.Models;
+﻿using openbankapi.core.IService;
+using openbankapi.core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace openbankapi.service
 {
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         public static List<AccountDetails> accounts = new List<AccountDetails>();
         public static List<Transaction> transactions = new List<Transaction>();
 
         public TransactionService()
         {
-            GenerateMockModelAccountDetails();
-            GenerateMockModelTransaction();
+            GenerateAccounts();
         }
-        public IEnumerable<Transaction> GetTransactions(long toDate, long fromDate,string accNo)
+        public IEnumerable<Transaction> GetTransactions(long toDate, long fromDate, string accNo)
         {
             return transactions.Where(x => x.BookingDateTime >= toDate && x.BookingDateTime <= fromDate);
         }
-
 
         public int GetBalance(string accNo)
         {
@@ -28,8 +26,8 @@ namespace openbankapi.service
             {
                 return 0;
             }
-            var balanceDebit = transactions.Where(x => x.AccountId == accNo && x.CreditDebitIndicator == "Debit").Sum(x => x.Amount.Value);
-            var balanceCredit = transactions.Where(x => x.AccountId == accNo && x.CreditDebitIndicator == "Credit").Sum(x => x.Amount.Value);
+            int balanceDebit = transactions.Where(x => x.AccountId == accNo && x.CreditDebitIndicator == TransactionType.Debit.ToString()).Sum(x => x.Amount.Value);
+            int balanceCredit = transactions.Where(x => x.AccountId == accNo && x.CreditDebitIndicator == TransactionType.Credit.ToString()).Sum(x => x.Amount.Value);
 
             return (balanceCredit - balanceDebit);
         }
@@ -46,7 +44,7 @@ namespace openbankapi.service
             {
                 return "Insufficient Balance";
             }
-            GenerateMockModelTransactions(to, from,amount, DateTime.UtcNow.Ticks);
+            ProcessTransaction(to, from, amount, DateTime.UtcNow.Ticks);
 
             return "Success";
         }
@@ -56,12 +54,12 @@ namespace openbankapi.service
             return accNo == "100" || accNo == "101" ? true : false;
         }
 
-        private void GenerateMockModelAccountDetails()
+        private void GenerateAccounts()
         {
 
             for (int i = 0; i < 2; i++)
             {
-                var accDetails = new AccountDetails()
+                AccountDetails accDetails = new AccountDetails()
                 {
                     Amount = new Amount
                     {
@@ -76,7 +74,7 @@ namespace openbankapi.service
                         Name = "rairupanaccount1",
                         SchemeName = "IBAN"
                     },
-                    AccountId = "10"+i,
+                    AccountId = "10" + i,
                     CreditDebitIndicator = "Debit",
                     CreditLine = new CreditLine
                     {
@@ -103,7 +101,8 @@ namespace openbankapi.service
             }
         }
 
-        private void GenerateMockModelTransactions(string accountNoTo,string accountNoFrom, int amount, long dateTimeOffset) {
+        private void ProcessTransaction(string accountNoTo, string accountNoFrom, int amount, long dateTimeOffset)
+        {
             var transactionDetailsReceiver = new Transaction
             {
                 AccountId = accountNoTo,
@@ -178,11 +177,11 @@ namespace openbankapi.service
             transactions.Add(transactionDetailsSender);
         }
 
-        private void GenerateMockModelTransaction() {
-            for (int i = 0; i < 2; i++) {
+        public void GenerateAmountFromTestFaucet(string accountNo) {
+            EnsureAccount(accountNo);
                 var transactionDetails = new Transaction
                 {
-                    AccountId = "10"+i,
+                    AccountId = accountNo,
                     Amount = new Amount
                     {
                         Currency = "USD",
@@ -212,11 +211,15 @@ namespace openbankapi.service
                     },
                     Status = "Booked",
                     TransactionInformation = "Cash from aburey",
-                    TransactionReference = "MockTransaction",
+                    TransactionReference = "FaucetTransaction",
                     ValueDateTime = 21342142123
                 };
                 transactions.Add(transactionDetails);
-            }
+        }
+
+        public enum TransactionType {
+            Credit,
+            Debit
         }
     }
 }

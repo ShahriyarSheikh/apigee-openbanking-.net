@@ -12,21 +12,25 @@ namespace openbankapi.nunit.tests
         TransactionService txService;
         string account1;
         string account2;
+
         [SetUp]
         public void Setup()
         {
             txService = new TransactionService();
             account1 = "100";
             account2 = "101";
+            txService.GenerateAmountFromTestFaucet(account1);
+            txService.GenerateAmountFromTestFaucet(account2);
         }
 
         [Test]
         public void Provided_Account_Details_Should_Send_Transaction() {
-            //var txs = txService.GetTransactions(DateTime.UtcNow.Ticks, DateTime.UtcNow.Ticks);
-
-            var sendTxResponse = txService.SendTransaction(account2, account1, 50);
+            int amountToSend = 50;
+            int expectedBalance = (txService.GetBalance(account1) - amountToSend);
+            string sendTxResponse = txService.SendTransaction(account2, account1, amountToSend);
             Assert.AreEqual("Success", sendTxResponse);
-
+            int actualBalance = (txService.GetBalance(account1));
+            Assert.AreEqual(expectedBalance, actualBalance);
         }
 
         [Test]
@@ -40,10 +44,10 @@ namespace openbankapi.nunit.tests
 
         [Test]
         public void Provided_Account_Should_Send_And_Check_Remaining_Balance() {
-            var expectedBalace = (txService.GetBalance(account1) - 50);
-            var sendTxResponse = txService.SendTransaction(account2, account1, 50);
+            int expectedBalace = (txService.GetBalance(account1) - 50);
+            string sendTxResponse = txService.SendTransaction(account2, account1, 50);
             Assert.AreEqual("Success", sendTxResponse);
-            var actualBalance = txService.GetBalance(account1);
+            int actualBalance = txService.GetBalance(account1);
             Assert.AreEqual(expectedBalace, actualBalance);
 
         }

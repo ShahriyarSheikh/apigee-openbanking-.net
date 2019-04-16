@@ -1,4 +1,4 @@
-﻿namespace openbankapi.service.Models
+﻿namespace openbankapi.core.Models
 {
 
     public class Amount

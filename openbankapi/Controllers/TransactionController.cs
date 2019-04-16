@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using openbankapi.service;
-using openbankapi.service.Models;
+using openbankapi.core.IService;
+using openbankapi.core.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,24 +17,25 @@ namespace openbankapi.Controllers
     [ApiController]
     public class TransactionController : ControllerBase
     {
-        TransactionService txService;
-        public TransactionController()
+        private readonly ITransactionService _transactionService;
+
+        public TransactionController(ITransactionService transactionService)
         {
-            txService = new TransactionService();
+            _transactionService = transactionService;
         }
         [HttpGet,Route("transactions")]
         public IEnumerable<Transaction> GetTransactions(string toBookingDateTime, string fromBookingDateTime) {
-            return txService.GetTransactions(Convert.ToDateTime(toBookingDateTime).Ticks, Convert.ToDateTime(fromBookingDateTime).Ticks,"100");
+            return _transactionService.GetTransactions(Convert.ToDateTime(toBookingDateTime).Ticks, Convert.ToDateTime(fromBookingDateTime).Ticks,"100");
         }
 
         [HttpPost,Route("send")]
         public string PerformTransaction(ProcessTransaction transactionToSend) {
-            return txService.SendTransaction(transactionToSend.To, transactionToSend.From, transactionToSend.Amount);
+            return _transactionService.SendTransaction(transactionToSend.To, transactionToSend.From, transactionToSend.Amount);
         }
 
         [HttpGet,Route("balance")]
         public int GetBalance(string accNo) {
-            return txService.GetBalance(accNo);
+            return _transactionService.GetBalance(accNo);
         }
     }
 

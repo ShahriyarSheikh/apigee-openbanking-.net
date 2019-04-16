@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi", "openbankapi\openbankapi.csproj", "{FA7360FC-4F6A-4D81-A486-7EA69893B565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openbankapi.service", "openbankapi.service\openbankapi.service.csproj", "{1A5430B9-B243-42EF-B042-2A008289EB24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.service", "openbankapi.service\openbankapi.service.csproj", "{1A5430B9-B243-42EF-B042-2A008289EB24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openbankapi.nunit.tests", "openbankapi.nunit.tests\openbankapi.nunit.tests.csproj", "{4596059A-D2C9-4106-A7B7-389B52446C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.nunit.tests", "openbankapi.nunit.tests\openbankapi.nunit.tests.csproj", "{4596059A-D2C9-4106-A7B7-389B52446C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openbankapi.core", "openbankapi.core\openbankapi.core.csproj", "{311FE190-8626-4BF5-9936-66A21692E6A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4596059A-D2C9-4106-A7B7-389B52446C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4596059A-D2C9-4106-A7B7-389B52446C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4596059A-D2C9-4106-A7B7-389B52446C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311FE190-8626-4BF5-9936-66A21692E6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311FE190-8626-4BF5-9936-66A21692E6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311FE190-8626-4BF5-9936-66A21692E6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311FE190-8626-4BF5-9936-66A21692E6A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
