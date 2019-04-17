@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using openbankapi.core.IService;
+using openbankapi.service.IService;
 using openbankapi.core.Models;
-using System;
+using openbankapi.Models;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace openbankapi.Controllers
 {
@@ -23,28 +22,24 @@ namespace openbankapi.Controllers
         {
             _transactionService = transactionService;
         }
-        [HttpGet,Route("transactions")]
-        public IEnumerable<Transaction> GetTransactions(string toBookingDateTime, string fromBookingDateTime) {
-            return _transactionService.GetTransactions(Convert.ToDateTime(toBookingDateTime).Ticks, Convert.ToDateTime(fromBookingDateTime).Ticks,"100");
+        [HttpGet, Route("transactions")]
+        public IEnumerable<Transaction> GetTransactions(long toBookingDateTime, long fromBookingDateTime)
+        {
+            string accountNumber = "100";
+            return _transactionService.GetTransactions(accountNumber, toBookingDateTime, fromBookingDateTime);
         }
 
-        [HttpPost,Route("send")]
-        public string PerformTransaction(ProcessTransaction transactionToSend) {
+        [HttpPost, Route("send")]
+        public string PerformTransaction(ProcessTransaction transactionToSend)
+        {
             return _transactionService.SendTransaction(transactionToSend.To, transactionToSend.From, transactionToSend.Amount);
         }
 
-        [HttpGet,Route("balance")]
-        public int GetBalance(string accNo) {
+        [HttpGet, Route("balance")]
+        public int GetBalance(string accNo)
+        {
             return _transactionService.GetBalance(accNo);
         }
     }
 
-    public class ProcessTransaction {
-        [Required]
-        public string To { get; set; }
-        [Required]
-        public string From { get; set; }
-        [Required]
-        public int Amount { get; set; }
-    }
 }

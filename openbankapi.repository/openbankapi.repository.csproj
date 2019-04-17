@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\openbankapi.core\openbankapi.models.csproj" />
-    <ProjectReference Include="..\openbankapi.repository\openbankapi.repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.service", "open
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.nunit.tests", "openbankapi.nunit.tests\openbankapi.nunit.tests.csproj", "{4596059A-D2C9-4106-A7B7-389B52446C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openbankapi.core", "openbankapi.core\openbankapi.core.csproj", "{311FE190-8626-4BF5-9936-66A21692E6A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.models", "openbankapi.core\openbankapi.models.csproj", "{311FE190-8626-4BF5-9936-66A21692E6A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.repository", "openbankapi.repository\openbankapi.repository.csproj", "{E16FD276-71AA-4AF6-B9F7-EE80612687FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "openbankapi.repository.model", "openbankapi.repository.model\openbankapi.repository.model.csproj", "{5A159B76-243E-4346-BAB5-616B88DC383A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{311FE190-8626-4BF5-9936-66A21692E6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{311FE190-8626-4BF5-9936-66A21692E6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{311FE190-8626-4BF5-9936-66A21692E6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16FD276-71AA-4AF6-B9F7-EE80612687FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16FD276-71AA-4AF6-B9F7-EE80612687FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16FD276-71AA-4AF6-B9F7-EE80612687FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16FD276-71AA-4AF6-B9F7-EE80612687FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A159B76-243E-4346-BAB5-616B88DC383A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A159B76-243E-4346-BAB5-616B88DC383A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A159B76-243E-4346-BAB5-616B88DC383A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A159B76-243E-4346-BAB5-616B88DC383A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

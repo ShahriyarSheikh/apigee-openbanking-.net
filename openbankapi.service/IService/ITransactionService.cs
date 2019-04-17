@@ -1,15 +1,12 @@
 ﻿using openbankapi.core.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace openbankapi.core.IService
+namespace openbankapi.service.IService
 {
     public interface ITransactionService
     {
         int GetBalance(string accNo);
-        IEnumerable<Transaction> GetTransactions(long toDate, long fromDate, string accNo);
-        void GenerateAmountFromTestFaucet(string accountNo);
+        IEnumerable<Transaction> GetTransactions(string accNo, long toDate = 0, long fromDate = 0);
         string SendTransaction(string to, string from, int amount);
     }
 }
