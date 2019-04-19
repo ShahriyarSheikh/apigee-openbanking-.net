@@ -23,10 +23,10 @@ namespace openbankapi.Controllers
             _transactionService = transactionService;
         }
         [HttpGet, Route("transactions")]
-        public IEnumerable<Transaction> GetTransactions(long toBookingDateTime, long fromBookingDateTime)
+        public IEnumerable<Transaction> GetTransactions(TransactionFilter txFilter)
         {
             string accountNumber = "100";
-            return _transactionService.GetTransactions(accountNumber, toBookingDateTime, fromBookingDateTime);
+            return _transactionService.GetTransactions(accountNumber, txFilter.ToTicks(txFilter.ToBookingDate), txFilter.ToTicks(txFilter.FromBookingDate));
         }
 
         [HttpPost, Route("send")]

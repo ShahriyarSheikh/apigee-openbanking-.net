@@ -20,6 +20,8 @@ namespace openbankapi.service
         }
         public IEnumerable<Transaction> GetTransactions(string accNo, long toDate = 0, long fromDate = 0)
         {
+            //TODO: Handle toDate and fromDate validity in repository
+
             return _transactionRepository.GetTransactions(accNo, toDate, fromDate);
         }
 
